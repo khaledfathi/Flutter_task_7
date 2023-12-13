@@ -1,56 +1,44 @@
-
 import 'package:task_l7/models/abstract/model.dart';
 
-class EventModel extends Model<EventModel>{
+class EventModel extends Model<EventModel> {
   String? id;
-  String? title; 
-  String? details; 
-  String? date; 
-  String? timeFrom; 
-  String? timeTo;
-  String? status; 
-  Map<String , String>? row ; 
+  String? title;
+  String? description;
+  String? dateTime;
+  String? status;
 
-  EventModel({      
-    super.currentRow, 
-    this.id,
-    this.title,
-    this.details, 
-    this.date, 
-    this.timeFrom, 
-    this.timeTo, 
-    this.status, 
-  }){
-    currentRow = _toMap(); 
-  }
-
+  EventModel(
+      {super.tableName = 'events',
+      this.id,
+      this.title,
+      this.description,
+      this.dateTime,
+      this.status}){
+        super.row = toMap(); 
+      }
 
   @override
-  List<EventModel> createQueryModelList(List<Map<String, dynamic>> query) {
-    List<EventModel> queryAsModel = []; 
-    for (var row in query) {
-      queryAsModel.add(EventModel( 
-        id: row['id'],
-        title: row['title'],
-        details: row['details'], 
-        date: row['date'], 
-        timeFrom: row['timeFrom'], 
-        timeTo: row['timeTo'],
-        status: row['status'],
-      )) ; 
+  List<EventModel> createQueryModelList(List<Map<String, Object?>> queryResult) {
+    List<EventModel> modelList = [];
+    for (var row in queryResult) {
+      modelList.add(EventModel(
+        id: row['id'].toString(), 
+        title: row['title'].toString(), 
+        description: row['description'].toString(), 
+        dateTime: row['date_time'].toString(), 
+        status: row['status'].toString(), 
+      ));
     }
-    return queryAsModel; 
+    return modelList; 
   }
-  
-  Map<String, String> _toMap() {
+
+  @override
+  Map<String, dynamic> toMap() {
     return {
-      'title' : title??'' ,
-      'details' : details??'',
-      'date' : date??'', 
-      'timeFrom' : timeFrom??'',
-      'timeTo' : timeTo??'' , 
-      'status' : status??''
-    }; 
-    
-  } 
+      'title': title??'',
+      'description' : description??'', 
+      'date_time': dateTime ??'',
+      'status' : status??'',
+    };
+  }
 }

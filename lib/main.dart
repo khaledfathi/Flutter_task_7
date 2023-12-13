@@ -1,16 +1,20 @@
 
 import 'package:flutter/material.dart';
-import 'package:task_l7/controllers/services/session/session.dart';
+import 'package:task_l7/controllers/services/database/interface/app_database.dart';
 import 'package:task_l7/views/screens/home/home_archive/home_archive_screen.dart';
 import 'package:task_l7/views/screens/home/home_done/home_done_screen.dart';
 import 'package:task_l7/views/screens/home/home_events/home_events_screen.dart';
 import 'package:task_l7/views/screens/home/home_screen.dart';
 import 'package:task_l7/views/theme/dark_theme.dart';
-
+import 'package:task_l7/controllers/services/globals/globals.dart' as globals ; 
 
 void main()async{
-  WidgetsFlutterBinding.ensureInitialized(); 
-  Session.init(); 
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  //init database  depend on DBMS
+  globals.appDatabase = AppDatabase.Sqlite();
+  await globals.appDatabase!.initDB(); 
+
   runApp(const App()); 
 }
 

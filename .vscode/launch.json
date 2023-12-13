@@ -13,13 +13,13 @@
             "name": "task_l7 (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",        
         },
         {
             "name": "task_l7 (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
-        }
+            "flutterMode": "release",            
+        },
     ]
 }
