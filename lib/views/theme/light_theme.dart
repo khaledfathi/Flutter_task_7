@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DarkTheme {
+class LightTheme {
   static ThemeData apply = ThemeData(
     //
     textButtonTheme: TextButtonThemeData(
@@ -9,53 +9,53 @@ class DarkTheme {
     scaffoldBackgroundColor: Colors.black,
     //
     appBarTheme: const AppBarTheme(
-      foregroundColor: Colors.white,
-      backgroundColor: Colors.black,
+      foregroundColor: Colors.black,
+      backgroundColor: Colors.white,
       surfaceTintColor: Colors.transparent
     ),
     //
     navigationBarTheme: const NavigationBarThemeData(
       surfaceTintColor: Colors.transparent,
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       labelTextStyle: MaterialStatePropertyAll(
-          TextStyle(color: Colors.white, fontSize: 16)),
+          TextStyle(color: Colors.black, fontSize: 16)),
       indicatorShape:
-          ContinuousRectangleBorder(side: BorderSide(color: Colors.white)),
+          ContinuousRectangleBorder(side: BorderSide(color: Colors.black)),
       indicatorColor: Colors.transparent,
-      iconTheme: MaterialStatePropertyAll(IconThemeData(color: Colors.white)),
+      iconTheme: MaterialStatePropertyAll(IconThemeData(color: Colors.black)),
     ),
     //
     drawerTheme: const DrawerThemeData(
       backgroundColor: Colors.grey,
     ),
-
     //
-    // colorScheme: const ColorScheme.dark( background: Colors.white ,secondary: Colors.black , ),
-    colorScheme: const ColorScheme.dark(
+    primaryColor: Colors.white,
+    colorScheme: const ColorScheme.light(
         background: Colors.deepOrangeAccent,
-        outline: Colors.white,
-        onSecondary: Colors.white),
-    primaryColor: Colors.black,
-    // primaryColorLight: Colors.white,
-    // primaryColorDark: Colors.black,
+        onBackground: Colors.white,
+        outline: Colors.black,
+        onSecondary: Colors.black),
+    // colorScheme: const ColorScheme.light(background: Colors.black ,secondary: Colors.white , ),
+    // primaryColorLight: Colors.black,
+    // primaryColorDark: Colors.white,
     //
     textTheme: const TextTheme(
+      // bodySmall: TextStyle(color: Colors.white),
+      // bodyMedium: TextStyle(color: Colors.white),
+      // bodyLarge: TextStyle(color: Colors.white),
       // displaySmall: TextStyle(color: Colors.white),
       // displayMedium: TextStyle(color: Colors.white),
       // displayLarge: TextStyle(color: Colors.white),
       // headlineSmall: TextStyle(color: Colors.white),
       headlineMedium: TextStyle(
-          color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+          color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
       // headlineLarge: TextStyle(color: Colors.white),
       // labelSmall: TextStyle(color: Colors.white),
       // labelMedium: TextStyle(color: Colors.white),
       // labelLarg: TextStyle(color: Colors.white),
-      titleSmall: TextStyle(color: Colors.white, fontSize: 14),
-      titleMedium: TextStyle(color: Colors.white, fontSize: 18),
-      titleLarge: TextStyle(color: Colors.white, fontSize: 20),
-      // bodySmall: TextStyle(color: Colors.white),
-      // bodyMedium: TextStyle(color: Colors.white),
-      // bodyLarge: TextStyle(color: Colors.white),
+      titleSmall: TextStyle(color: Colors.black, fontSize: 14),
+      titleMedium: TextStyle(color: Colors.black, fontSize: 18),
+      titleLarge: TextStyle(color: Colors.black, fontSize: 20),
     ),
   );
   //

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_l7/views/shared/events_page/events_page.dart';
 
 class HomeEventsScreen extends StatefulWidget {
   static const String route = 'home-events';
@@ -9,16 +10,10 @@ class HomeEventsScreen extends StatefulWidget {
 }
 
 class _HomeEventsScreenState extends State<HomeEventsScreen> {
-  DateTime? date;
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: MediaQuery.sizeOf(context).width,
-        height: MediaQuery.sizeOf(context).height,
-        child: Column(
-          children: [
-            ElevatedButton(onPressed: () async {}, child: Text('data')),
-          ],
-        ));
+    return EventsPage(); 
   }
+
 }

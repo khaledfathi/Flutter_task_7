@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:task_l7/controllers/services/constants/database_constants.dart';
-import 'package:task_l7/controllers/services/database/interface/database_core.dart';
+import 'package:task_l7/controllers/services/database/interface/database_core_interface.dart';
 
-class DatabaseSqlite implements DatabaseCore<DatabaseSqlite>{
+class DatabaseSqlite implements DatabaseCoreInterface<DatabaseSqlite>{
 
   static DatabaseSqlite appDatabase = DatabaseSqlite(); 
 

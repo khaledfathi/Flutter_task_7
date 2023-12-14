@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_l7/views/shared/events_page/events_page.dart';
 
 class HomeDoneScreen extends StatefulWidget {
   static const String route = 'home-done';
@@ -11,12 +12,6 @@ class HomeDoneScreen extends StatefulWidget {
 class _HomeDoneScreenState extends State<HomeDoneScreen> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height,
-      child: Container(
-        color: Colors.green,
-      ),
-    );
+    return EventsPage(); 
   }
 }

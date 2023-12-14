@@ -1,5 +1,5 @@
 
-abstract class DatabaseCore<T> {
+abstract class DatabaseCoreInterface<T> {
   //required [raw , select(id) , seletWhere , insert , update(id) , updateWhere , delete(id?) , join , joinLeft , joinRight]
   Future<void> initDB(); 
   Future<void> recreateDatabase(); 

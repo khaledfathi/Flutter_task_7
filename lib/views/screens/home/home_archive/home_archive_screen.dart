@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_l7/views/shared/events_page/events_page.dart';
 
 class HomeArchiveScreen extends StatefulWidget {
   static const String route = 'home-archive'; 
@@ -11,10 +12,6 @@ class HomeArchiveScreen extends StatefulWidget {
 class _HomeArchiveScreenState extends State<HomeArchiveScreen> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height,
-      child: Container(color: Colors.red,),
-    ); 
+    return EventsPage(); 
   }
 }
