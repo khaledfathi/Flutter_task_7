@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_l7/controllers/enum/bottom_dialog_mode.dart';
 import 'package:task_l7/controllers/helper/helper.dart';
 import 'package:task_l7/controllers/screens/home/active_events/home_active_events_controller.dart';
@@ -33,14 +34,15 @@ class _HomeEventsScreenState extends State<HomeActiveEventsScreen> {
       builder: (context, events) {
         if (events.connectionState == ConnectionState.done) {
           return EventsPage(
-            child: ListView.builder(              
+            child: ListView.builder(
               itemCount: events.data!.length,
               itemBuilder: (context, index) {
                 return EventViewBox(
                   title: events.data![index].title!,
                   date: Helper.dateFromISO8601(events.data![index].dateTime!),
                   time: Helper.timeFromISO8601(events.data![index].dateTime!),
-                  onTapMore: () => _onTapMore(events.data![index].id!),
+                  onTapMore: () =>
+                      _onTapMore(events.data![index].id!, events.data!, index),
                 );
               },
             ),
@@ -52,21 +54,36 @@ class _HomeEventsScreenState extends State<HomeActiveEventsScreen> {
     );
   }
 
-  void _onTapMore(String id) {
+  void _onTapMore(String id, List<EventModel> eventsList, int index) {
     double screenWidth = MediaQuery.sizeOf(context).width;
     double screenHeight = MediaQuery.sizeOf(context).height;
     showDialog(
         context: context,
         builder: (context) {
           return BottomButtonsDialog(
-            mode: BottomDialogMode.active,
-            height: screenHeight *0.3,
-            width: screenWidth,
-            onTapButtonOne: ()async => await _controller.changeEventStatusToDone(context,id),
-            onTapButtonTwo: ()async => await _controller.changeEventStatusToArchive(context,id),
-            // onTapButtonThree: ()async => await _controller.deleteEvent(context,id).then((value) => setState((){})),
-            );
+              mode: BottomDialogMode.active,
+              height: screenHeight * 0.3,
+              width: screenWidth,
+              onTapButtonOne: () async {
+                await _controller.changeEventStatusToDone(context, id);
+                setState(() {
+                  eventsList.removeAt(index);
+                });
+              },
+              onTapButtonTwo: () async {
+                await _controller.changeEventStatusToArchive(context, id);
+                setState(() {
+                  eventsList.removeAt(index);
+                });
+              },
+              onTapButtonThree: () async {
+                await _controller
+                    .deleteEvent(context, id)
+                    .then((value) => setState(() {}));
+                setState(() {
+                  eventsList.removeAt(index);
+                });
+              });
         });
   }
-
 }

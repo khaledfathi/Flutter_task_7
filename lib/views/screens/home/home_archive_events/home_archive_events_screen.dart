@@ -40,7 +40,7 @@ class _HomeArchiveScreenState extends State<HomeArchiveEventsScreen> {
                   title: events.data![index].title!,
                   date: Helper.dateFromISO8601(events.data![index].dateTime!),
                   time: Helper.timeFromISO8601(events.data![index].dateTime!),
-                  onTapMore: () => _onTapMore(events.data![index].id!),
+                  onTapMore: () => _onTapMore(events.data![index].id! , events.data! , index),
                 );
               },
             ),
@@ -51,21 +51,37 @@ class _HomeArchiveScreenState extends State<HomeArchiveEventsScreen> {
       },
     );
   }
-
-  void _onTapMore(String id) {
+  void _onTapMore(String id, List<EventModel> eventsList, int index) {
     double screenWidth = MediaQuery.sizeOf(context).width;
     double screenHeight = MediaQuery.sizeOf(context).height;
     showDialog(
         context: context,
         builder: (context) {
           return BottomButtonsDialog(
-            mode: BottomDialogMode.archive,
-            height: screenHeight *0.3,
-            width: screenWidth,
-            onTapButtonOne: ()async => await _controller.changeEventStatusToActive(context,id),
-            onTapButtonTwo: ()async => await _controller.changeEventStatusToDone(context,id),
-            onTapButtonThree: ()async => await _controller.changeEventStatusToDone(context,id),
-            );
+              mode: BottomDialogMode.archive,
+              height: screenHeight * 0.3,
+              width: screenWidth,
+              onTapButtonOne: () async {
+                await _controller.changeEventStatusToActive(context, id);
+                setState(() {
+                  eventsList.removeAt(index);
+                });
+              },
+              onTapButtonTwo: () async {
+                await _controller.changeEventStatusToDone(context, id);
+                setState(() {
+                  eventsList.removeAt(index);
+                });
+              },
+              onTapButtonThree: () async {
+                await _controller
+                    .deleteEvent(context, id)
+                    .then((value) => setState(() {}));
+                setState(() {
+                  eventsList.removeAt(index);
+                });
+              });
         });
   }
+
 }
