@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:task_l7/controllers/services/database/database_sqlite.dart';
 
 class Validation {
@@ -10,11 +11,13 @@ class Validation {
   bool _required = true;
   bool _numeric = true;
   bool _email = true;
-  
+  bool _date = true;
+  bool _time = true;
+
   // validation results :
-    // => errors
-  List<String> _errors =[];
-    //
+  // => errors
+  List<String> _errors = [];
+  //
   bool _isValid = false;
 
   Validation(this.text, {this.fieldName = ''});
@@ -22,7 +25,7 @@ class Validation {
   Validation length({required int minLength, int? maxLength}) {
     if (maxLength != null) {
       _length = text.length >= minLength && text.length <= maxLength;
-      _length 
+      _length
           ? null
           : _errors.add('$fieldName length must be $minLength ~ $maxLength');
     } else {
@@ -43,11 +46,9 @@ class Validation {
   }
 
   Future<Validation> unique(String table, String column) async {
-
     await DatabaseSqlite.appDatabase
         .table(table)
-        .selectWhere('$column  = ?' , [text])
-        .then((queryResult) {
+        .selectWhere('$column  = ?', [text]).then((queryResult) {
       _unique = queryResult.isEmpty;
       _unique ? null : _errors.add('$fieldName already exist');
     });
@@ -67,15 +68,37 @@ class Validation {
     return this;
   }
 
-  Validation validate() {
-    _isValid  = (_length && _unique && _required && _numeric && _email);
-    return this; 
+  Validation date() {
+    _date = RegExp(r'^\d{2}/\d{2}/\d{4}$').hasMatch(text);
+    //convert date format to ISO8601
+    String dateISO8601 = text.split('/').reversed.toList().join('-');
+    try {
+      DateTime.parse(dateISO8601);
+      _date = true ; 
+    } catch (e) {
+      debugPrint('Validation.dart : Line 76 : $e'); 
+      _date = false;
+    }
+    _date ? null : _errors.add('$fieldName is Invalid');
+    return this;
   }
 
-  List<String>  get errors {
-    return _errors;     
+  Validation time() {
+    _time = RegExp(r'^([0-1][0-9]|2[0-3]):[0-5][0-9]$').hasMatch(text);
+    _time ? null : _errors.add('$fieldName is Invalid');
+    return this;
   }
+
+  Validation validate() {
+    _isValid = (_length && _unique && _required && _numeric && _email);
+    return this;
+  }
+
+  List<String> get errors {
+    return _errors;
+  }
+
   bool get isValid {
-    return _isValid; 
+    return _isValid;
   }
 }

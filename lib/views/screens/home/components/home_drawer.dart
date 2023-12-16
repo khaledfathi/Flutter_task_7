@@ -6,13 +6,16 @@ import 'package:task_l7/views/screens/home/components/drawer_back_button.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class HomeDrawer extends StatelessWidget {
-
+  
   final WebViewController controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.disabled)
     ..loadRequest(Uri.parse('https://google.com'));
 
+  void Function()? onTapDeleteAll ; 
 
-  HomeDrawer({super.key});
+  HomeDrawer({super.key,
+    this.onTapDeleteAll
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class HomeDrawer extends StatelessWidget {
       {
         'iconData': Icons.delete_forever,
         'title': 'Delete all events',
-        'onTap': () {/* controller.deleteAllEvents() */}
+        'onTap': onTapDeleteAll
       },
       {
         'iconData': Icons.info,

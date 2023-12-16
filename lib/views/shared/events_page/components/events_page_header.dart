@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_l7/controllers/services/constants/general_constants.dart';
 import 'package:task_l7/views/screens/add_event/add_events_screen.dart';
 
 class EventsPageHeader extends StatelessWidget {
@@ -52,8 +53,7 @@ class EventsPageHeader extends StatelessWidget {
   }
 
   String _currentDate (){
-    List<String> months = ['Jan' , 'Feb' , 'Mar' , 'Apr' , 'May' , 'June' , 'July' , 'Aug' , 'Sep' , 'Oct' , 'Nov' , 'Dec']; 
     DateTime today = DateTime.now();
-    return '${today.day} ${months[today.month-1]} , ${today.year}';
+    return '${today.day} ${MONTHES[today.month-1]} , ${today.year}';
   }
 }

@@ -18,7 +18,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSize {
       title: Text(
         title ?? '',
       ),
-      titleSpacing: 50,
+      titleSpacing: 5,
       actions: [
         IconButton(
           padding: EdgeInsets.symmetric(horizontal: 10),

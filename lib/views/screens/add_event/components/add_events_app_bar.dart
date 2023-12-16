@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AddEventsAppBar extends StatelessWidget implements PreferredSize {
-  const AddEventsAppBar({super.key});
+  final void Function()? onTapSave;
+  const AddEventsAppBar({super.key, 
+    this.onTapSave
+  });
 
   @override
   Widget get child => this;
@@ -15,7 +18,7 @@ class AddEventsAppBar extends StatelessWidget implements PreferredSize {
       titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
       actions: [
         InkWell(
-          onTap: () {},
+          onTap: onTapSave,
           child: const Row(
             children: [
               Icon(

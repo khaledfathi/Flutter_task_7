@@ -6,7 +6,12 @@ import 'package:task_l7/views/shared/row_date_picker.dart';
 
 class EventsPage extends StatefulWidget {
   static const String route = 'home-events';
-  const EventsPage({super.key});
+  
+  final Widget child; 
+
+  const EventsPage({super.key,
+    required this.child
+  });
 
   @override
   State<EventsPage> createState() => _HomeEventsScreenState();
@@ -39,16 +44,7 @@ class _HomeEventsScreenState extends State<EventsPage> {
             ),
             //body
             Expanded(
-              child: ListView(
-                children: const [
-                  EventViewBox(),
-                  EventViewBox(),
-                  EventViewBox(),
-                  EventViewBox(),
-                  EventViewBox(),
-                  EventViewBox(),
-                ],
-              ),
+              child: widget.child,
             ),
           ],
         ));

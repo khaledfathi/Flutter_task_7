@@ -1,0 +1,10 @@
+widget_class_strucure: 
+  - main_class :   
+    - attributes : 
+      - <static const String route>
+  - state_class :
+    - attributes_structure : 
+      - "[screen_controller ...]"
+      - "[widget_keys ...]"
+      - "[input_controllers ...]"
+      - "[values ...]"

@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
 class EventViewBox extends StatelessWidget {
-  const EventViewBox({super.key});
+  final String title ; 
+  final String time ;
+  final String date ; 
+  final void Function()? onTapMore; 
+
+  const EventViewBox({super.key, 
+    required this.title,
+    required this.date,
+    required this.time, 
+    this.onTapMore, 
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +39,10 @@ class EventViewBox extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
+                  Expanded(
                     flex: 3,
-                    child: Text(
-                      'Watch youtube',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    child: Text(title,
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -42,7 +51,7 @@ class EventViewBox extends StatelessWidget {
                     child: Container(
                       alignment: Alignment.centerRight,
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: onTapMore,
                           icon: const Icon(
                             Icons.more_horiz,
                             size: 30,
@@ -77,7 +86,7 @@ class EventViewBox extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child: Text('Jue 11 , 2022', style: _eventBoxTextStyle(),),
+                      child: Text(date, style: _eventBoxTextStyle(),),
                     )
                   ],
                 ),
@@ -90,7 +99,7 @@ class EventViewBox extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child: Text('10:25' , style: _eventBoxTextStyle(),),
+                      child: Text(time , style: _eventBoxTextStyle(),),
                     )
                   ],
                 )
