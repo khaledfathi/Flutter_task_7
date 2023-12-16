@@ -6,7 +6,7 @@ class LightTheme {
     textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all(Colors.red))),
-    scaffoldBackgroundColor: Colors.black,
+    scaffoldBackgroundColor: Colors.white,
     //
     appBarTheme: const AppBarTheme(
       foregroundColor: Colors.black,

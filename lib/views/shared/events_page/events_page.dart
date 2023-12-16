@@ -1,6 +1,5 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:task_l7/views/shared/event_view_box.dart';
 import 'package:task_l7/views/shared/events_page/components/events_page_header.dart';
 import 'package:task_l7/views/shared/row_date_picker.dart';
 

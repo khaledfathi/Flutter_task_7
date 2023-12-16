@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_l7/controllers/screens/home/home_controller.dart';
+import 'package:task_l7/controllers/states/global_state.dart';
 import 'package:task_l7/views/screens/home/components/home_app_bar.dart';
 import 'package:task_l7/views/screens/home/components/home_bottom_navigator_bar.dart';
 import 'package:task_l7/views/screens/home/components/home_drawer.dart';
@@ -30,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<String> _title = ['My Events', 'Done Events', 'Archive Events'];
   //current selected index for navigator bar
   late int _index;
-  //current Theme flag 
+  //current Theme flag
   late bool _isThemeLight;
 
   @override
@@ -42,24 +44,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: HomeAppBar(
-          title: _title[_index],
-          isThemeLight: _isThemeLight,
-          onPressChangeTheme: ()=> _changeTheme()
+    return Consumer<GlobaleState>(builder: (context, global, child) {
+      return Scaffold(
+        appBar: HomeAppBar(
+            title: _title[_index],
+            isThemeLight: _isThemeLight,
+            onPressChangeTheme: () => _changeTheme(global)),
+        drawer: HomeDrawer(
+          onTapDeleteAll: _onTapDeleteAll,
         ),
-      drawer: HomeDrawer(
-        onTapDeleteAll: _onTapDeleteAll,
-      ),
-      bottomNavigationBar: HomeBottomNavigatorBar(
-        selectedIndex: _index,
-        onDestinationSelected: (val) => _onDestinationSelected(val),
-      ),
-      body: _subScreen[_index],
-    );
+        bottomNavigationBar: HomeBottomNavigatorBar(
+          selectedIndex: _index,
+          onDestinationSelected: (val) => _onDestinationSelected(val),
+        ),
+        body: _subScreen[_index],
+      );
+    });
   }
 
-  //HomeBottomNavigatorBar : on click 
+  //HomeBottomNavigatorBar : on click
   void _onDestinationSelected(int val) {
     setState(() {
       _index = val;
@@ -67,12 +70,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   //HomeAppBar : onPressChangeTheme (change theme icon buttom)
-  void _changeTheme() {
-    _isThemeLight = _controller.changeTheme(_isThemeLight);
+  void _changeTheme(GlobaleState global) {
+    _isThemeLight = _controller.changeTheme(_isThemeLight , global);
     setState(() {});
   }
 
-  void _onTapDeleteAll () async{
+  void _onTapDeleteAll() async {
     await _controller.deleteAllEvents(context);
   }
 }

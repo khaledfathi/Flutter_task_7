@@ -32,6 +32,15 @@ class _HomeDoneScreenState extends State<HomeDoneEventsScreen> {
       future: _data,
       builder: (context, events) {
         if (events.connectionState == ConnectionState.done) {
+          if (events.data!.isEmpty) {
+            return EventsPage(
+                child: Center(
+              child: Text(
+                'Nothing Found',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ));
+          }
           return EventsPage(
             child: ListView.builder(
               itemCount: events.data!.length,
@@ -40,7 +49,8 @@ class _HomeDoneScreenState extends State<HomeDoneEventsScreen> {
                   title: events.data![index].title!,
                   date: Helper.dateFromISO8601(events.data![index].dateTime!),
                   time: Helper.timeFromISO8601(events.data![index].dateTime!),
-                  onTapMore: () => _onTapMore(events.data![index].id! , events.data! , index),
+                  onTapMore: () =>
+                      _onTapMore(events.data![index].id!, events.data!, index),
                 );
               },
             ),
@@ -51,7 +61,6 @@ class _HomeDoneScreenState extends State<HomeDoneEventsScreen> {
       },
     );
   }
-
 
   void _onTapMore(String id, List<EventModel> eventsList, int index) {
     double screenWidth = MediaQuery.sizeOf(context).width;
@@ -85,5 +94,4 @@ class _HomeDoneScreenState extends State<HomeDoneEventsScreen> {
               });
         });
   }
-
 }

@@ -21,16 +21,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSize {
       titleSpacing: 5,
       actions: [
         IconButton(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          // onPressed: onPressChangeTheme,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           onPressed: (){},
-          icon: Icon(Icons.search),
+          icon: const Icon(Icons.search),
           iconSize: 35,
         ),
         IconButton(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           onPressed: onPressChangeTheme,
-          icon:isThemeLight ? Icon(Icons.mode_night_sharp): Icon(Icons.light_mode_rounded),
+          icon:isThemeLight ? const Icon(Icons.mode_night_sharp): Icon(Icons.light_mode_rounded),
           iconSize: 35,
         ),
       ],

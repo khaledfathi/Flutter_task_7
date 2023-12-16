@@ -1,7 +1,6 @@
 dart : double.infinity = 1/0 !
 
 flutter : how to do restart app - (e.g) click event?
-flutter : update theme dosen't always appear on date picker?!
 flutter : inkwell dosen't work on expanded even with nested widgets ?!
 
 general : violate the DRY principle  in MVC !

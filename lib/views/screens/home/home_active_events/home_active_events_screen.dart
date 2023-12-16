@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:task_l7/controllers/enum/bottom_dialog_mode.dart';
 import 'package:task_l7/controllers/helper/helper.dart';
 import 'package:task_l7/controllers/screens/home/active_events/home_active_events_controller.dart';
@@ -33,6 +32,15 @@ class _HomeEventsScreenState extends State<HomeActiveEventsScreen> {
       future: _data,
       builder: (context, events) {
         if (events.connectionState == ConnectionState.done) {
+          if (events.data!.isEmpty) {
+            return EventsPage(
+                child: Center(
+              child: Text(
+                'Nothing Found',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ));
+          }
           return EventsPage(
             child: ListView.builder(
               itemCount: events.data!.length,
