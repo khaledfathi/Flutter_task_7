@@ -18,6 +18,7 @@ class _HomeEventsScreenState extends State<HomeActiveEventsScreen> {
   //screen controller
   final HomeActiveEventsController _controller = HomeActiveEventsController();
   //values
+  DateTime initialSelectedDate = DateTime.now(); 
   late Future<List<EventModel>> _data;
 
   @override
@@ -34,6 +35,9 @@ class _HomeEventsScreenState extends State<HomeActiveEventsScreen> {
         if (events.connectionState == ConnectionState.done) {
           if (events.data!.isEmpty) {
             return EventsPage(
+                startDate: DateTime(2023, 12 , DateTime.now().day-5),
+                initialSelectedDate: initialSelectedDate ,
+                onDateChange: (date)=>_onDateChange(date),
                 child: Center(
               child: Text(
                 'Nothing Found',
@@ -42,6 +46,9 @@ class _HomeEventsScreenState extends State<HomeActiveEventsScreen> {
             ));
           }
           return EventsPage(
+            startDate: DateTime(2023, 12 , DateTime.now().day-5),
+            initialSelectedDate: initialSelectedDate ,
+            onDateChange: (date)=>_onDateChange(date),
             child: ListView.builder(
               itemCount: events.data!.length,
               itemBuilder: (context, index) {
@@ -93,5 +100,12 @@ class _HomeEventsScreenState extends State<HomeActiveEventsScreen> {
                 });
               });
         });
+  }
+
+  
+  void _onDateChange (DateTime date){
+    _data = _controller.getActiveEventsByDate(date); 
+    initialSelectedDate = date; 
+    setState(() {});
   }
 }

@@ -45,7 +45,7 @@ class _HomeArchiveScreenState extends State<HomeArchiveEventsScreen> {
             child: ListView.builder(
               itemCount: events.data!.length,
               itemBuilder: (context, index) {
-                return EventViewBox(
+                return EventViewBox(                  
                   title: events.data![index].title!,
                   date: Helper.dateFromISO8601(events.data![index].dateTime!),
                   time: Helper.timeFromISO8601(events.data![index].dateTime!),
@@ -94,4 +94,5 @@ class _HomeArchiveScreenState extends State<HomeArchiveEventsScreen> {
               });
         });
   }
+
 }

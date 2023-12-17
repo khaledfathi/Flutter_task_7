@@ -22,4 +22,6 @@ class HomeController {
       Navigator.pushNamedAndRemoveUntil(context, HomeScreen.route, (route) => false); 
     }); 
   }
+
+ 
 }

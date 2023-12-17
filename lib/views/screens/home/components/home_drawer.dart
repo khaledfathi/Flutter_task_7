@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:task_l7/views/screens/google_web_view/google_web_view_screen.dart';
 import 'package:task_l7/views/screens/home/components/drawer_back_button.dart';
+import 'package:task_l7/views/screens/rate_app/rate_app_screen.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -52,7 +52,7 @@ class HomeDrawer extends StatelessWidget {
       {
         'iconData': Icons.info,
         'title': 'Rate App',
-        'onTap': () => Navigator.of(context).pushNamed(GoogleWebViewScreen.route),
+        'onTap': () => Navigator.of(context).pushNamed(RateAppScreen.route),
       },
       {
         'iconData': Icons.star_rate_rounded,

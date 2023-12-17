@@ -6,11 +6,15 @@ class RowDatePicker extends StatelessWidget {
   final DatePickerController? controller;
   final void Function(DateTime date)? onDateChange;
   final DateTime startDate ; 
+  final List<DateTime>? activeDates ; 
+  final DateTime? initialSelectedDate; 
 
   const RowDatePicker({super.key, 
     required this.startDate, 
     this.controller, 
-    this.onDateChange
+    this.onDateChange,
+    this.activeDates, 
+    this.initialSelectedDate,
   });
 
   @override
@@ -19,7 +23,8 @@ class RowDatePicker extends StatelessWidget {
       startDate,
       controller: controller,
       height: 100,
-      initialSelectedDate: DateTime.now(),
+      activeDates: activeDates,
+      initialSelectedDate: initialSelectedDate?? DateTime.now(),
       selectionColor: Theme.of(context).colorScheme.background,
       selectedTextColor: Theme.of(context).colorScheme.onBackground,
       dayTextStyle: Theme.of(context).textTheme.titleSmall!,

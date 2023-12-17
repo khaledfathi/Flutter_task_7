@@ -35,4 +35,8 @@ class Helper {
     }
     return "${hour < 10 ? '0$hour' : '$hour'}:${dateObject.minute} $timePeriod";
   }
+  static List<DateTime> sortDate (List<DateTime> dates){
+    dates.sort((pastDate, futureDate)=>pastDate.compareTo(futureDate)); 
+    return dates; 
+  }
 }

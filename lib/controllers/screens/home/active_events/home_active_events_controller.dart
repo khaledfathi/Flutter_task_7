@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:task_l7/controllers/enum/event_status.dart';
+import 'package:task_l7/controllers/helper/helper.dart';
 import 'package:task_l7/models/event_model.dart';
 
 class HomeActiveEventsController {
   Future<List<EventModel>> getActiveEvents() async {
-    return EventModel().selectWhere('status = ?', [EventStatus.active.name]);
+    try {
+      return  await EventModel().selectWhere('status = ? ', [EventStatus.active.name ]);
+    } catch (e) {
+      debugPrint('HomeActiveEvents => getActiveEvents : $e'); 
+    }
+    return []; 
+  }
+  
+  Future<List<EventModel>> getActiveEventsByDate (DateTime date)async{
+    try {
+        return  await EventModel().selectWhere('status = ? AND date_time LIKE ? ', [EventStatus.active.name , "${date.year}-${date.month}-${date.day}%"]);
+    } catch (e) {
+      debugPrint('HomeActiveEvents => getActiveEventsByDate : $e'); 
+    }
+    return [] ; 
   }
 
   Future<void> changeEventStatusToDone(BuildContext context, String id) async {
@@ -24,5 +39,14 @@ class HomeActiveEventsController {
     await EventModel()
         .delete(id: int.parse(id))
         .then((value) => Navigator.pop(context));
+  }
+
+  Future<List<DateTime>> getAllEventsDateTime () async {
+    List<DateTime> eventsdates= []; 
+    List<EventModel> events = await EventModel().select(); 
+    for (var row in events) {
+      eventsdates.add(DateTime.parse(row.dateTime!)); 
+    }
+    return Helper.sortDate(eventsdates); 
   }
 }

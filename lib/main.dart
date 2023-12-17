@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:task_l7/controllers/services/database/app_database.dart';
 import 'package:task_l7/controllers/states/global_state.dart';
 import 'package:task_l7/views/screens/add_event/add_events_screen.dart';
-import 'package:task_l7/views/screens/google_web_view/google_web_view_screen.dart';
 import 'package:task_l7/views/screens/home/home_screen.dart';
 import 'package:task_l7/controllers/services/globals/globals.dart' as globals;
+import 'package:task_l7/views/screens/rate_app/rate_app_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +41,7 @@ class _AppState extends State<App> {
         initialRoute: HomeScreen.route,
         routes: {
           HomeScreen.route: (context) => const HomeScreen(),
-          GoogleWebViewScreen.route: (context) => GoogleWebViewScreen(),
+          RateAppScreen.route: (context) => RateAppScreen(),
           AddEventsScreen.route: (context) => const AddEventsScreen(),
         },
       );

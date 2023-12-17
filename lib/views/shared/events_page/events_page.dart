@@ -3,20 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:task_l7/views/shared/events_page/components/events_page_header.dart';
 import 'package:task_l7/views/shared/row_date_picker.dart';
 
-class EventsPage extends StatefulWidget {
+class EventsPage extends StatelessWidget {
   static const String route = 'home-events';
+  final void Function(DateTime dateime)? onDateChange ; 
   
+  final DateTime? startDate; 
+  final List<DateTime>? activeDates; 
   final Widget child; 
+  final DateTime? initialSelectedDate; 
 
-  const EventsPage({super.key,
-    required this.child
+  EventsPage({super.key,
+    required this.child,
+    this.onDateChange,
+    this.startDate,
+    this.activeDates,
+    this.initialSelectedDate
+
   });
 
-  @override
-  State<EventsPage> createState() => _HomeEventsScreenState();
-}
-
-class _HomeEventsScreenState extends State<EventsPage> {
   //widget controllers
   final DatePickerController _datePickerController = DatePickerController();
 
@@ -34,23 +38,20 @@ class _HomeEventsScreenState extends State<EventsPage> {
                 children: [
                   const EventsPageHeader(),
                   RowDatePicker(
-                    startDate: DateTime.now(),
+                    startDate: startDate??DateTime.now(),
+                    activeDates: activeDates ,
                     controller: _datePickerController,
-                    onDateChange: _onDateChange ,
+                    initialSelectedDate: initialSelectedDate ,
+                    onDateChange: onDateChange ,
                   ),
                 ],
               ),
             ),
             //body
             Expanded(
-              child: widget.child,
+              child: child,
             ),
           ],
         ));
-  }
-
-  //HomeEventsDatePickerRow : onDateChange function 
-  void _onDateChange (DateTime date){
-    setState(() {});
   }
 }

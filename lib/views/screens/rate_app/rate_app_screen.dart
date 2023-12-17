@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class GoogleWebViewScreen extends StatelessWidget {
+class RateAppScreen extends StatelessWidget {
   
   static const String route = 'google-web-view'; 
   
@@ -9,7 +9,7 @@ class GoogleWebViewScreen extends StatelessWidget {
     ..setJavaScriptMode(JavaScriptMode.disabled)
     ..loadRequest(Uri.parse('https://play.google.com/store/games?hl=en&gl=US'));
 
-  GoogleWebViewScreen({super.key});
+  RateAppScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
